@@ -17,7 +17,7 @@ public class AccountOperation {
     private Date operationDate;
     private double amount;
     private OperationType type;
-    @ManyToMany
+    @ManyToOne
     private BankAccount bankAccount;
 
 }

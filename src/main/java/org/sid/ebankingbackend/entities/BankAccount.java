@@ -1,9 +1,6 @@
 package org.sid.ebankingbackend.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type",length = 4)
 @Data @NoArgsConstructor @AllArgsConstructor
 public class BankAccount {
     @Id
@@ -20,7 +19,7 @@ public class BankAccount {
     private Date createdAt;
     private AccountStatus status;
     //plusieure compt pour un client
-    @ManyToMany
+    @ManyToOne
     private Customer customer;
     @OneToMany(mappedBy =  "bankAccount")
     private List<AccountOperation> accountOperations;
